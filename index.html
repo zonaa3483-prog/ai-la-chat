@@ -78,62 +78,57 @@
         document.getElementById('header-logo').src = BOT_IMAGE_URL;
         document.getElementById('main-logo').src = BOT_IMAGE_URL;
 
-                // --- SUAL-CAVAB BAZASI ---
-        const knowledgeBase = {
-            "salam": "Salam! Necəsən? Sənə bu gün necə kömək edə bilərəm?",
-            "sağ ol": "Dəyməz! Həmişə xidmətindəyəm.😊",
-            "necəsən": "Mən çox yaxşıyam! Sənin üçün nə edə bilərəm?",
-            "sən necəsən": "Mən bir süni intellektəm, hər zaman işləməyə hazıram! Bəs sən necəsən?",
-            "adın nədir": "Mənim adım Aİ-LA. Sənin ağıllı köməkçinəm.",
-            "kim yaradıb": "Məni Əli Məhərrəmov yaradıb.",
-            "hara gedək": "Sən hara getsən məndə ora gedəcəm. Daima yanındayam",
-            "hava necədir": "Pəncərədən baxmağı unutma, amma ümid edirəm ki, ürəyin kimi gözəldir!",
-            
-            // Yeni əlavə edilən məlumat:
-            "əli məhərrəmov kimdir": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuşdur. 
-            Orta təhsilini 2007-ci ildə Ağsu rayon Daşdəmirbəyli kənd tam orta məktəbində almışdır. 
-            Məktəb illərindən fəallığı ilə seçilmiş, şeir müsabiqələrində və səhnəciklərdə rollar almışdır. 
-            
-            Yaradıcılıq fəaliyyəti:
-            • "Qəlb Yarası" (2018) - Şeirlər kitabı.
-            • "Qisas" (2023) - Sevgi romanı.
-            • "Dedektiv Con" (2023) - Dedektiv-macəra romanı.
-            • "Sənsizlik" (2024) - Məhəbbət haqqında qısa mətnlər.
-            • "Tapşırıq" (2026) - Vətənpərvərlik mövzusunda kitab.
-            
-            Təhsili: ADMİU nəzdində Humanitar Kollecin Aktyor, Rejissor və Senarist ixtisasını bitirmişdir. 
-            İş təcrübəsi: İrşad-da satış təmsilçisi və "Department Manager" vəzifələrində çalışmışdır. 
-            Həmçinin mahnı sözləri müəllifidir (Youtube və SoundCloud-da mövcuddur). 
-            Daha ətraflı məlumat üçün: İnstagramda: elimeherremovofc səyfəsinə baxın`,
+                /// --- SUAL-CAVAB BAZASI ---
+const knowledgeBase = {
+    "salam": "Salam! Necəsən? Sənə bu gün necə kömək edə bilərəm?",
+    "sağ ol": "Dəyməz! Həmişə xidmətindəyəm.😊",
+    "necəsən": "Mən çox yaxşıyam! Sənin üçün nə edə bilərəm?",
+    "sən necəsən": "Mən bir süni intellektəm, hər zaman işləməyə hazıram! Bəs sən necəsən?",
+    "adın nədir": "Mənim adım Aİ-LA. Sənin ağıllı köməkçinəm.",
+    "kim yaradıb": "Məni Əli Məhərrəmov yaradıb.",
+    "hara gedək": "Sən hara getsən məndə ora gedəcəm. Daima yanındayam",
+    "hava necədir": "Pəncərədən baxmağı unutma, amma ümid edirəm ki, ürəyin kimi gözəldir!",
+    
+    "əli məhərrəmov kimdir": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuşdur. 
+    Orta təhsilini 2007-ci ildə Ağsu rayon Daşdəmirbəyli kənd tam orta məktəbində almışdır. 
+    Məktəb illərindən fəallığı ilə seçilmiş, şeir müsabiqələrində və səhnəciklərdə rollar almışdır. 
+    
+    Yaradıcılıq fəaliyyəti:
+    • "Qəlb Yarası" (2018) - Şeirlər kitabı.
+    • "Qisas" (2023) - Sevgi romanı.
+    • "Dedektiv Con" (2023) - Dedektiv-macəra romanı.
+    • "Sənsizlik" (2024) - Məhəbbət haqqında qısa mətnlər.
+    • "Tapşırıq" (2026) - Vətənpərvərlik mövzusunda kitab.
+    
+    Təhsili: ADMİU nəzdində Humanitar Kollecin Aktyor, Rejissor və Senarist ixtisasını bitirmişdir. 
+    İş təcrübəsi: İrşad-da satış təmsilçisi və "Department Manager" vəzifələrində çalışmışdır. 
+    Həmçinin mahnı sözləri müəllifidir (Youtube və SoundCloud-da mövcuddur). 
+    Daha ətraflı məlumat üçün: İnstagramda: elimeherremovofc səyfəsinə baxın`,
 
-            "əli məhərrəmov": "O, yazıçı, aktyor və ssenaristdir. 'Qəlb Yarası', 'Qisas' və 'Dedektiv Con' kimi kitabların müəllifidir.", 
-            "saat neçədir" : "Mən tam vaxtı sizə deyə bilmirəm. Yaxşısı telefona baxın.", 
-            "qəlb yarası": `Qəlb Yarası (2018) - Əli Məhərrəmov tərəfindən yazılmış şeirlər kitabıdır. 
-            Kitabda nakam sevgi, puç olan məhəbbət, ailə və yaradan mövzusunda 200 şeir yer alır. 
-            2023-cü ildə nəşr olunub, onlayn satışda və mir.az saytında yayımlanır. Xoş oxumalar!`,
+    "əli məhərrəmov": "O, yazıçı, aktyor və ssenaristdir. 'Qəlb Yarası', 'Qisas' və 'Dedektiv Con' kimi kitabların müəllifidir.", 
+    "saat neçədir" : "Mən tam vaxtı sizə deyə bilmirəm. Yaxşısı telefona baxın.", 
+    "qəlb yarası": `Qəlb Yarası (2018) - Əli Məhərrəmov tərəfindən yazılmış şeirlər kitabıdır. 
+    Kitabda nakam sevgi, puç olan məhəbbət, ailə və yaradan mövzusunda 200 şeir yer alır. 
+    2023-cü ildə nəşr olunub, onlayn satışda və mir.az saytında yayımlanır. Xoş oxumalar!`,
 
-            "qisas": `Qisas (2023) - Baş obraz Xədicənin universitet illərində Əliyə aşiq olmasından bəhs edir. 
-            Lakin Xədicənin göbək kəsti edildiyi Muradın intiqam planları iki aşiqin xoşbəxtliyinə əngəl olur. 
-            Bu gərgin sevgi hekayəsini Mir.az saytından yükləyə bilərsiniz.`,
+    "qisas": `Qisas (2023) - Baş obraz Xədicənin universitet illərində Əliyə aşiq olmasından bəhs edir. 
+    Lakin Xədicənin göbək kəsti edildiyi Muradın intiqam planları iki aşiqin xoşbəxtliyinə əngəl olur. 
+    Bu gərgin sevgi hekayəsini Mir.az saytından yükləyə bilərsiniz.`,
 
-            "dedektiv con": `Dedektiv Con (2023) - Hadisələr Amerikanın Texas ştatında baş verir. 
-            Məşhur dedektiv Con, arvadını öldürən Billin izinə düşür. Təhlükəli sui-qəsdlərdən yayınan 
-            Conun ölüm-dirim savaşı və ağıllı gedişləri kitabda əks olunub. Mir.az saytından yükləyə bilərsiniz.`,
+    "dedektiv con": `Dedektiv Con (2023) - Hadisələr Amerikanın Texas ştatında baş verir. 
+    Məşhur dedektiv Con, arvadını öldürən Billin izinə düşür. Təhlükəli sui-qəsdlərdən yayınan 
+    Conun ölüm-dirim savaşı və ağıllı gedişləri kitabda əks olunub. Mir.az saytından yükləyə bilərsiniz.`,
 
-            "sənsizlik": `Sənsizlik (2024) - Əli Məhərrəmovun 4-cü kitabıdır. 
-            Kitabda sevgi, xəyanət və sənsizlik mövzuları qısa mətnlərlə ifadə olunub. 
-            2024-2026-cı illərdə qələmə alınan bu kitab dəyərli qısa sözlərlə zəngindir. Mir.az-da mövcuddur.`,
+    "sənsizlik": `Sənsizlik (2024) - Əli Məhərrəmovun 4-cü kitabıdır. 
+    Kitabda sevgi, xəyanət və sənsizlik mövzuları qısa mətnlərlə ifadə olunub. 
+    2024-2026-cı illərdə qələmə alınan bu kitab dəyərli qısa sözlərlə zəngindir. Mir.az-da mövcuddur.`,
 
-            "tapşırıq": `Tapşırıq - Dövlət qulluğuna qəbul olan Vaqif adlı gəncin həyatından bəhs edir. 
-            O, ailəsindən imtina edərək insan alveri şəbəkəsini çökdürmək üçün gizli bir missiyanı qəbul edir. 
-            Ölüm və qalım arasındakı bu mübarizədə Vaqifin macəraları oxucunu gözləyir.`,
+    "tapşırıq": `Tapşırıq - Dövlət qulluğuna qəbul olan Vaqif adlı gəncin həyatından bəhs edir. 
+    O, ailəsindən imtina edərək insan alveri şəbəkəsini çökdürmək üçün gizli bir missiyanı qəbul edir. 
+    Ölüm və qalım arasındakı bu mübarizədə Vaqifin macəraları oxucunu gözləyir.`,
 
-            "əli məhərrəmov kimdir": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. 
-            "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. 
-            Həmçinin aktyorluq və rejissorluq təhsili almış, mahnı sözləri müəllifi kimi tanınmışdır.`,
-            
-            "kitabları": "Əli Məhərrəmovun kitabları: Qəlb Yarası, Qisas, Dedektiv Con, Sənsizlik və Tapşırıq. Tam məlumat üçün.Müəllifə yazın. " };
-
+    "kitabları": "Əli Məhərrəmovun kitabları: Qəlb Yarası, Qisas, Dedektiv Con, Sənsizlik və Tapşırıq. Tam məlumat üçün Müəllifə yazın."
+}; // <-- BAX, BU MÖTƏRİZƏ VƏ NÖQTƏLİ VERGÜL KODUN SONUDUR.
 
         const body = document.body;
         const welcomeUI = document.getElementById('welcome-ui');
