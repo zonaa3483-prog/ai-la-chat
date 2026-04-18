@@ -3,115 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-LA - Süni İntellekt (2026)</title>
+    <title>AI-LA - Süni İntellekt Köpəkçisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #FFFFFF; display: flex; flex-direction: column; height: 100vh; color: #1A1D21; transition: 0.3s; overflow: hidden; }
-        
-        body.dark-mode { background: #0F0F0F; color: #F5F5F5; }
-        body.dark-mode header, body.dark-mode footer { background: #181818; border-color: #2A2A2A; }
-        body.dark-mode .ai { background: #232323; color: #E0E0E0; border: 1px solid #333; }
-        body.dark-mode input { background: #232323; border-color: #333; color: white; }
-
-        header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #E8EAEB; background: white; z-index: 10; }
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1.5px solid #007bff; }
-        .header-actions { display: flex; align-items: center; gap: 20px; } 
-        .action-btn { cursor: pointer; font-size: 20px; color: #70777F; transition: 0.2s; user-select: none; }
-
-        #welcome-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; gap: 15px; }
-        .welcome-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff; padding: 4px; box-shadow: 0 10px 20px rgba(0,123,255,0.2); }
-        .welcome-icon { width: 44px; height: 44px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #007bff; font-size: 22px; }
-        
-        main { flex: 1; overflow-y: auto; padding: 20px; display: none; flex-direction: column; gap: 18px; scroll-behavior: smooth; }
-        .msg { padding: 14px 18px; border-radius: 20px; max-width: 85%; line-height: 1.5; font-size: 15px; word-wrap: break-word; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .user { background: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 4px 12px rgba(0,123,255,0.15); }
-        .ai { background: #F1F3F4; color: #1A1D21; align-self: flex-start; border-bottom-left-radius: 4px; white-space: pre-wrap; }
-
-        footer { padding: 20px; background: white; border-top: 1px solid #E8EAEB; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .input-box { width: 100%; max-width: 700px; display: flex; gap: 10px; align-items: center; position: relative; }
-        input { flex: 1; padding: 14px 55px 14px 22px; border: 1.5px solid #E8EAEB; border-radius: 30px; outline: none; font-size: 16px; background: #f8f9fa; transition: 0.2s; }
-        input:focus { border-color: #007bff; background: #fff; box-shadow: 0 0 0 4px rgba(0,123,255,0.05); }
-        button#sendBtn { position: absolute; right: 6px; background: #34A853; color: white; border: none; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(52,168,83,0.3); }
+        body { background-color: #ffffff; font-family: 'Inter', sans-serif; }
+        .chat-bubble { max-width: 80%; border-radius: 20px; padding: 12px 16px; margin-bottom: 10px; }
+        .user-msg { background-color: #f0f7ff; color: #1a1a1a; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai-msg { background-color: #f3f4f6; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .input-shadow { box-shadow: 0 -5px 20px rgba(0,0,0,0.05); }
     </style>
 </head>
-<body>
+<body class="flex flex-col h-screen">
 
-<header>
-    <div class="header-left">
-        <img src="https://ia902800.us.archive.org/11/items/0da-12f-11-d-0a-6-4f-33-ad-83-d-4d-91b-40f-930/0da12f11-d0a6-4f33-ad83-d4d91b40f930.jpg" class="logo">
-        <div><strong>AI-LA 2.0</strong><br><small style="color:#70777F">Süni İntellekt</small></div>
-    </div>
-    <div class="header-actions">
-        <div class="action-btn" title="Yeni Söhbət" onclick="location.reload()">+</div>
-        <div class="action-btn" title="Rejimi Dəyiş" onclick="document.body.classList.toggle('dark-mode')">🌓</div>
-    </div>
-</header>
+    <header class="flex items-center justify-between p-4 border-b">
+        <div class="flex items-center gap-3">
+            <img src="https://i.imgur.com/86v9V89.png" class="w-10 h-10 rounded-full object-cover border" alt="AI-LA">
+            <div>
+                <h1 class="text-sm font-bold text-gray-800">AI-LA</h1>
+                <p class="text-[10px] text-gray-500">Süni intellekt köməkçisi</p>
+            </div>
+        </div>
+        <button class="text-gray-600"><i class="fa-regular fa-moon text-xl"></i></button>
+    </header>
 
-<div id="welcome-screen">
-    <img src="https://ia902800.us.archive.org/11/items/0da-12f-11-d-0a-6-4f-33-ad-83-d-4d-91b-40f-930/0da12f11-d0a6-4f33-ad83-d4d91b40f930.jpg" class="welcome-avatar">
-    <div class="welcome-icon">🚀</div>
-    <h1>AI-LA 2.0-a xoş gəldiniz</h1>
-    <p>Mən 2026-cı ilin ən sürətli Gemini texnologiyası ilə təchiz olunmuşam. Sizi eşidirəm!</p>
-</div>
+    <main id="chat-screen" class="flex-1 overflow-y-auto p-4 flex flex-col items-center">
+        
+        <div id="welcome-ui" class="mt-20 flex flex-col items-center text-center">
+            <div class="relative mb-6">
+                <img src="https://i.imgur.com/86v9V89.png" class="w-24 h-24 rounded-full border-4 border-blue-50 shadow-lg" alt="AI-LA">
+                <div class="absolute -bottom-2 -right-2 bg-blue-50 p-2 rounded-full shadow-sm">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">AI-LA-ya xoş gəldiniz</h2>
+            <p class="text-gray-500 max-w-[280px] leading-relaxed">
+                Mən AI-LA-yam, sizin ağıllı köməkçiniz. Hər hansı bir sual verin və ya söhbətə başlayın.
+            </p>
+        </div>
 
-<main id="chat"></main>
+        <div id="messages-container" class="w-full flex flex-col hidden mt-4"></div>
+    </main>
 
-<footer>
-    <div class="input-box">
-        <input type="text" id="in" placeholder="AI-LA-ya mesaj yazın...">
-        <button id="sendBtn" onclick="send()">➔</button>
-    </div>
-    <p style="font-size: 11px; color: #A0A4A8;">AI-LA 2026 • Bütün suallara cavab verməyə hazırdır.</p>
-</footer>
+    <footer class="p-4 bg-white input-shadow">
+        <div class="max-w-2xl mx-auto relative">
+            <input id="userInput" type="text" placeholder="AI-LA-ya mesaj yazın..." 
+                class="w-full py-4 px-6 pr-16 bg-gray-50 border border-gray-200 rounded-[30px] focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all text-gray-700">
+            
+            <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-400 hover:bg-blue-500 text-white p-3 rounded-full transition-all">
+                <svg class="w-5 h-5 rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+            </button>
+        </div>
+        <p class="text-[10px] text-center text-gray-400 mt-3">
+            AI-LA səhv edə bilər. Vacib məlumatları yoxlayın.
+        </p>
+    </footer>
 
-<script type="module">
-    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+    <script>
+        // SƏNİN HAQQINDA MƏLUMATLAR (Bura istədiyini əlavə et)
+        const knowledgeBase = {
+            "salam": "Salam! Mən AI-LA. Sənə necə kömək edə bilərəm?",
+            "kim yaradıb": "Mən sənin şəxsi köməkçinəm və sənin tərəfindən proqramlaşdırılmışam!",
+            "adın nədir": "Mənim adım AI-LA-dır.",
+            "hara gedək": "Bu gün hava əladır, bəlkə bir az gəzəsən?",
+            "kömək et": "Əlbəttə! Nə barədə köməyə ehtiyacın var?"
+        };
 
-    // YENİ API AÇARINI BURADA DƏYİŞDİR!
-    const API_KEY = "AIzaSyBwXmLRoBx_Zlg51NnN-7m-mfA9NGce6iQ"; 
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    
-    // MODEL 2026-cı il versiyasına keçirildi: gemini-2.0-flash-exp
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+        const welcomeUI = document.getElementById('welcome-ui');
+        const msgContainer = document.getElementById('messages-container');
+        const input = document.getElementById('userInput');
 
-    const chatDiv = document.getElementById('chat');
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const input = document.getElementById('in');
+        function handleSend() {
+            const text = input.value.trim().toLowerCase();
+            if (!text) return;
 
-    window.send = async () => {
-        const val = input.value.trim();
-        if(!val) return;
+            // İlk mesajda xoş gəldiniz ekranını gizlət
+            welcomeUI.classList.add('hidden');
+            msgContainer.classList.remove('hidden');
 
-        welcomeScreen.style.display = 'none';
-        chatDiv.style.display = 'flex';
+            // İstifadəçi mesajı
+            addBubble(input.value, 'user-msg');
+            input.value = '';
 
-        addMsg(val, 'user');
-        input.value = "";
-        const loadingId = addMsg("Düşünürəm...", 'ai');
-
-        try {
-            const result = await model.generateContent(val);
-            const response = await result.response;
-            document.getElementById(loadingId).innerText = response.text();
-        } catch (err) {
-            console.error(err);
-            document.getElementById(loadingId).innerText = "Bağlantı xətası! VPN-in aktiv olduğundan və ya API açarının yeniliyindən əmin olun.";
+            // Bot cavabı (Gecikmə ilə)
+            setTimeout(() => {
+                let response = "Bağışlayın, bu mövzuda hələ təlimatlandırılmamışam. Amma sizinlə söhbət etmək xoşdur!";
+                
+                for (let key in knowledgeBase) {
+                    if (text.includes(key)) {
+                        response = knowledgeBase[key];
+                        break;
+                    }
+                }
+                addBubble(response, 'ai-msg');
+            }, 600);
         }
-    };
 
-    function addMsg(txt, cls) {
-        const id = 'm' + Date.now();
-        const d = document.createElement('div');
-        d.id = id; d.className = 'msg ' + cls; d.textContent = txt;
-        chatDiv.appendChild(d);
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-        return id;
-    }
+        function addBubble(text, type) {
+            const div = document.createElement('div');
+            div.className = `chat-bubble ${type}`;
+            div.innerText = text;
+            msgContainer.appendChild(div);
+            document.getElementById('chat-screen').scrollTop = document.getElementById('chat-screen').scrollHeight;
+        }
 
-    input.addEventListener("keypress", (e) => { if(e.key === "Enter") send(); });
-</script>
+        // Enter düyməsi ilə göndərmək
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") handleSend();
+        });
+    </script>
 </body>
 </html>
