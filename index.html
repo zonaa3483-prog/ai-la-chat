@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-LA - Süni İntellekt Köməkçisi</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #FFFFFF; display: flex; flex-direction: column; height: 100vh; color: #1A1D21; overflow: hidden; }
+
+        /* Header */
+        header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #E8EAEB; background: white; }
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .header-logo { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; }
+        .header-text h1 { font-size: 15px; font-weight: 700; }
+        .header-text p { font-size: 11px; color: #70777F; }
+        .header-actions { display: flex; gap: 15px; color: #70777F; font-size: 22px; cursor: pointer; }
+
+        /* Main Area */
+        main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; }
+
+        /* Welcome Screen */
+        #welcome-section { display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; margin-top: 20%; }
+        .central-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; }
+        .central-icon { width: 40px; height: 40px; background: #F1F3F4; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #34A853; font-size: 20px; }
+        .welcome-title { font-size: 22px; font-weight: 700; }
+        .welcome-sub { font-size: 14px; color: #70777F; max-width: 280px; }
+
+        /* Chat Messages */
+        #chat-messages { width: 100%; max-width: 600px; display: none; flex-direction: column; gap: 15px; padding-bottom: 100px; }
+        .message { padding: 12px 16px; border-radius: 18px; font-size: 15px; max-width: 85%; line-height: 1.4; word-wrap: break-word; }
+        .user { background: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai { background: #F1F3F4; color: #1A1D21; align-self: flex-start; border-bottom-left-radius: 4px; white-space: pre-wrap; }
+
+        /* Footer */
+        footer { padding: 15px 20px; background: white; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .input-box { width: 100%; max-width: 600px; display: flex; align-items: center; background: #fff; border: 1px solid #E8EAEB; border-radius: 25px; padding: 5px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        input { flex: 1; border: none; padding: 10px; font-size: 16px; outline: none; }
+        .send-btn { border: none; background: #34A853; color: white; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.4; transition: 0.3s; }
+        .send-btn.active { opacity: 1; }
+        .disclaimer { font-size: 11px; color: #A0A4A8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <img src="https://i.ibb.co/Xz9kH9C/AI-LA-Avatar.jpg" class="header-logo">
+        <div class="header-text">
+            <h1>AI-LA</h1>
+            <p>Süni intellekt köməkçisi</p>
+        </div>
+    </div>
+    <div class="header-actions">
+        <span onclick="newChat()">+</span>
+        <span>&#9790;</span>
+    </div>
+</header>
+
+<main id="scroll-area">
+    <div id="welcome-section">
+        <img src="https://i.ibb.co/Xz9kH9C/AI-LA-Avatar.jpg" class="central-avatar">
+        <div class="central-icon">✦</div>
+        <h2 class="welcome-title">AI-LA-ya xoş gəldiniz</h2>
+        <p class="welcome-sub">Mən AI-LA-yam, sizin ağıllı köməkçiniz. Hər hansı bir sual verin və ya söhbətə başlayın.</p>
+    </div>
+    <div id="chat-messages"></div>
+</main>
+
+<footer>
+    <div class="input-box">
+        <input type="text" id="userInput" placeholder="AI-LA-ya mesaj yazın..." oninput="toggleBtn()">
+        <button id="sendBtn" class="send-btn" onclick="askAI()">➔</button>
+    </div>
+    <p class="disclaimer">AI-LA səhv edə bilər. Vacib məlumatları yoxlayın.</p>
+</footer>
+
+<script type="module">
+    // Replit daxili kitabxanaları deyil, birbaşa Google-un rəsmi CDN-i istifadə olunur
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+    const API_KEY = "AIzaSyBP_yDeXxMjP7EngTQqDIK-a7f0L9WlHVs";
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const input = document.getElementById('userInput');
+    const btn = document.getElementById('sendBtn');
+    const messages = document.getElementById('chat-messages');
+    const welcome = document.getElementById('welcome-section');
+    const scrollArea = document.getElementById('scroll-area');
+
+    window.toggleBtn = () => {
+        btn.classList.toggle('active', input.value.trim() !== "");
+    };
+
+    window.askAI = async () => {
+        const text = input.value.trim();
+        if (!text) return;
+
+        welcome.style.display = 'none';
+        messages.style.display = 'flex';
+
+        addMsg(text, 'user');
+        input.value = "";
+        toggleBtn();
+
+        const loadingId = addMsg("Düşünürəm...", 'ai');
+
+        try {
+            const result = await model.generateContent(text);
+            const response = await result.response;
+            updateMsg(loadingId, response.text());
+        } catch (err) {
+            updateMsg(loadingId, "Xəta baş verdi. API açarınızı və ya internetinizi yoxlayın.");
+        }
+    };
+
+    window.newChat = () => {
+        messages.innerHTML = "";
+        messages.style.display = "none";
+        welcome.style.display = "flex";
+    };
+
+    function addMsg(text, type) {
+        const id = 'm-' + Date.now();
+        const div = document.createElement('div');
+        div.id = id;
+        div.className = `message ${type}`;
+        div.textContent = text;
+        messages.appendChild(div);
+        scrollArea.scrollTop = scrollArea.scrollHeight;
+        return id;
+    }
+
+    function updateMsg(id, text) {
+        const div = document.getElementById(id);
+        if (div) div.textContent = text;
+        scrollArea.scrollTop = scrollArea.scrollHeight;
+    }
+
+    input.addEventListener("keypress", (e) => { if(e.key === "Enter") askAI(); });
+</script>
+
+</body>
+</html>
+
