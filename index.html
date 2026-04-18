@@ -13,7 +13,7 @@
         body { background-color: var(--bg); color: var(--text); transition: all 0.3s ease; font-family: 'Inter', sans-serif; }
         header { background-color: var(--header-bg); border-bottom: 1px solid rgba(128, 128, 128, 0.2); }
         
-        .chat-bubble { max-width: 85%; border-radius: 20px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; }
+        .chat-bubble { max-width: 85%; border-radius: 20px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; white-space: pre-wrap; }
         .user-msg { background-color: #3b82f6; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
         .ai-msg { background-color: #f3f4f6; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 4px; }
         .dark .ai-msg { background-color: #2d2d2d; color: #f3f4f6; }
@@ -27,7 +27,7 @@
 
     <header class="flex items-center justify-between p-4 sticky top-0 z-10">
         <div class="flex items-center gap-3">
-            <img id="header-logo" src="https://i.imgur.com/86v9V89.png" class="w-10 h-10 rounded-full object-cover border" alt="AI-LA">
+            <img id="header-logo" src="" class="w-10 h-10 rounded-full object-cover border" alt="AI-LA">
             <div>
                 <h1 class="text-sm font-bold">Aİ-LA</h1>
                 <p class="text-[10px] opacity-60">Suallarını Ayladan Soruş</p>
@@ -44,15 +44,13 @@
     </header>
 
     <main id="chat-screen" class="flex-1 overflow-y-auto p-4 flex flex-col">
-        
         <div id="welcome-ui" class="mt-20 flex flex-col items-center text-center">
             <div class="relative mb-6">
-                <img id="main-logo" src="https://i.imgur.com/86v9V89.png" class="w-24 h-24 rounded-full border-4 border-blue-100 shadow-lg" alt="AI-LA">
+                <img id="main-logo" src="" class="w-24 h-24 rounded-full border-4 border-blue-100 shadow-lg" alt="AI-LA">
             </div>
             <h2 class="text-2xl font-bold mb-2">Aİ-LA</h2>
             <p class="opacity-60 max-w-[280px] text-sm">Buyurun sualınızı verin.</p>
         </div>
-
         <div id="messages-container" class="w-full flex flex-col hidden space-y-2"></div>
     </main>
 
@@ -60,7 +58,6 @@
         <div class="max-w-2xl mx-auto relative">
             <input id="userInput" type="text" placeholder="Mesajınızı qeyd edin 😍" 
                 class="w-full py-4 px-6 pr-16 border border-transparent rounded-[30px] focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all shadow-sm">
-            
             <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-md transition-all">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
@@ -69,16 +66,7 @@
     </footer>
 
     <script>
-        // ==========================================
-        // 1. BOTUN ŞƏKİL LİNKİNİ BURADAN DƏYİŞDİR:
-        // ==========================================
-        const BOT_IMAGE_URL = "https://ia600604.us.archive.org/9/items/in-shot-20260418-170546888-edit-276364459678532/InShot_20260418_170546888_edit_276364459678532.png"; 
-
-        // Şəkilləri tətbiq etmək üçün avtomatik kod
-        document.getElementById('header-logo').src = BOT_IMAGE_URL;
-        document.getElementById('main-logo').src = BOT_IMAGE_URL;
-
-                    <script>
+        // Şəkil Linki
         const BOT_IMAGE_URL = "https://ia600604.us.archive.org/9/items/in-shot-20260418-170546888-edit-276364459678532/InShot_20260418_170546888_edit_276364459678532.png"; 
 
         document.getElementById('header-logo').src = BOT_IMAGE_URL;
@@ -95,32 +83,23 @@
             "hara gedək": "Sən hara getsən məndə ora gedəcəm. Daima yanındayam",
             "hava necədir": "Pəncərədən baxmağı unutma, amma ümid edirəm ki, ürəyin kimi gözəldir!",
             "saat neçədir": "Mən tam vaxtı sizə deyə bilmirəm. Yaxşısı telefona baxın.",
-
             "əli məhərrəmov": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. İnstagram: @elimeherremovofc`,
-
             "qəlb yarası": `Qəlb Yarası (2018) - Əli Məhərrəmov tərəfindən yazılmış şeirlər kitabıdır. Kitabda nakam sevgi, puç olan məhəbbət və ailə mövzusunda 200 şeir yer alır. Mir.az saytında yayımlanır. Xoş oxumalar!`,
-
             "qisas": `Qisas (2023) - Baş obraz Xədicənin universitet illərində Əliyə aşiq olmasından bəhs edir. Mir.az saytından yükləyə bilərsiniz.`,
-
             "dedektiv con": `Dedektiv Con (2023) - Hadisələr Amerikanın Texas ştatında baş verir. Məşhur dedektiv Con, arvadını öldürən Billin izinə düşür. Mir.az-da mövcuddur.`,
-
             "sənsizlik": `Sənsizlik (2024) - Əli Məhərrəmovun 4-cü kitabıdır. Kitabda sevgi, xəyanət və sənsizlik mövzuları qısa mətnlərlə ifadə olunub.`,
-
             "tapşırıq": `Tapşırıq - Dövlət qulluğuna qəbul olan Vaqif adlı gəncin gizli missiyasından bəhs edir.`,
-
             "kitabları": "Əli Məhərrəmovun kitabları: Qəlb Yarası, Qisas, Dedektiv Con, Sənsizlik və Tapşırıq.",
-
             "əlaqə": "İnstagram: @elimeherremovofc və ya Mail.ru vasitəsilə əlaqə yarada bilərsiniz.",
             "instagram": "Müəllifi instaqramda @elimeherremovofc istifadəçi adı ilə tapa bilərsiniz.",
             "şeirləri hardan oxuyum": "Qəlb Yarası şeirlər səhifəsinə girərək ordan bütün şeirləri oxuya bilərsiniz!",
             "çox sağol": "Sən sağ ol! Aİ-LA sənə yardım etməkdən məmnundur. 😊"
         }; 
 
-     
         const body = document.body;
         const welcomeUI = document.getElementById('welcome-ui');
         const msgContainer = document.getElementById('messages-container');
-        const input = document.getElementById('userInput');"
+        const input = document.getElementById('userInput');
         const themeBtn = document.querySelector('#theme-btn i');
 
         function toggleTheme() {
