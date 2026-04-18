@@ -49,8 +49,8 @@
             <div class="relative mb-6">
                 <img id="main-logo" src="https://i.imgur.com/86v9V89.png" class="w-24 h-24 rounded-full border-4 border-blue-100 shadow-lg" alt="AI-LA">
             </div>
-            <h2 class="text-2xl font-bold mb-2">Aİ-LA sizi salamlayır</h2>
-            <p class="opacity-60 max-w-[280px] text-sm">Mən sizin ağıllı köməkçinizəm. Buyurun, sualınızı verin.</p>
+            <h2 class="text-2xl font-bold mb-2">Aİ-LA Sizi Salamlayır</h2>
+            <p class="opacity-60 max-w-[280px] text-sm">Buyurun sualınızı verin.</p>
         </div>
 
         <div id="messages-container" class="w-full flex flex-col hidden space-y-2"></div>
@@ -58,14 +58,14 @@
 
     <footer class="p-4 input-shadow">
         <div class="max-w-2xl mx-auto relative">
-            <input id="userInput" type="text" placeholder="AI-LA-ya mesaj yazın..." 
+            <input id="userInput" type="text" placeholder="Mesajınızı qeyd edin 😍" 
                 class="w-full py-4 px-6 pr-16 border border-transparent rounded-[30px] focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all shadow-sm">
             
             <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-md transition-all">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
-        <p class="text-[10px] text-center opacity-40 mt-3">AI-LA səhv edə bilər. Məlumatları yoxlayın.</p>
+        <p class="text-[10px] text-center opacity-40 mt-3">Aİ-LA səhv edə bilər. Məlumatları ayrıca yoxlayın.</p>
     </footer>
 
     <script>
@@ -124,7 +124,7 @@
             input.value = '';
 
             setTimeout(() => {
-                let response = "Bağışlayın, Bu sual barədə məlumatım yoxdur!😔";
+                let response = "Bu barədə məlumatım yoxdur. Başqa sualınız varsa verin?🙂‍↔️";
                 for (let key in knowledgeBase) {
                     if (text.includes(key)) {
                         response = knowledgeBase[key];
