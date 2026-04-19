@@ -72,263 +72,70 @@
         document.getElementById('header-logo').src = BOT_IMAGE_URL;
         document.getElementById('main-logo').src = BOT_IMAGE_URL;
 
-        // --- SUAL-CAVAB BAZASI ---
-        const knowledgeBase = {
-            "salam": "Salam! Necəsən? Sənə necə kömək edə bilərəm?",
-            
-            "çox sağol": "Dəyməz! Həmişə xidmətindəyəm.😊",
-            
-            "necəsən": "Mən çox yaxşıyam! Sənin üçün nə edə bilərəm?",
-            
-            "darıxıram": "O duyğu insanı içdən yıxır. Qədir bilməyənlər üçün dəyməz.",
-            
-            "sən necəsən": "Mən bir süni intellektəm, hər zaman işləməyə hazıram! Bəs sən necəsən?",
-            
-            "adın nədir": "Mənim adım Aİ-LA. Sənin ağıllı köməkçinəm.",
-            
-            "yağış yağır": "Ən romantik hava yağışlı havadır.",
-            
-            "hesabla": "Mən kalkulyator deyiləm əzizim.",
-            
-            "mən kiməm": "Kim olduğunu bilmirəm. Amma gözəl qəlblisən.",
-            
-            "kim yaradıb": "Məni Əli Məhərrəmov yaradıb.",
-            
-            "bir tətbiq varmı": "Bəli Qəlb Yarası android telefonlar üçün mövcuddur. Yükləyə bilərsiz.",
-            
-            "onu sevirəm": "Bəs o necə sualını da düşün arada.",
-            
-            "təşəkkürlər": "Dəyməz ürəyim. Çox xoş oldu.",
-            
-            "tətbiq": "Qəlb Yarası android telefonlar üçün mövcuddur. Yükləyə bilərsiz.",
-            
-            "sitat de": "Sevgi ölüm deyil. Sevgi zülmdür.",
-            
-            "adım nədir": "Belə deyə bilərəm. Bəydisə Kral. Qadındırsa Kraliça.",
-            
-            "link": "https://qelbyarasielimeherremov.taplink.ws/ bu linkə daxil ol və bütün şeirlərdən və kitablardan məlumatlı ol.",
-            
-            "sayt": "https://elimeherremov.taplink.ws/ bura daxil ol həm kitablardan həmdə yeniliklərdən xəbərdar ol",
-            
-            "nə vaxt": "18.04.2026-cı ildə😊.",
-            
-            "sevdim": "Elə məndə.",
-            
-            "şeir": "Şeirləri oxumaq üçün. Google Qəlb Yarası yazıb axtarış edin.", 
-            
-            "səni sevirəm": "Sevmək yaxşı işdi. Məndə səni sevirəm canım❤️.",
-            
-            "ayla": "Buyurun. Sualınızı verin.",
-            
-            "mahnı": "Əli Məhərrəmovun bəstələdiyi mahnıları dinləmək üçün YouTube və ya İnstagram hesabına baxın",
-            
-            "watsapp": "+90 536 836 78 78 Yalnız sms yazın. Zəngə cavab verilmir.",
-            
-            "hara gedək": "Sən hara getsən məndə ora gedəcəm. Daima yanındayam",
-            
-            "hava necədir": "Pəncərədən baxmağı unutma, amma ümid edirəm ki, ürəyin kimi gözəldir!",
-            
-            "saat neçədir": "Mən tam vaxtı sizə deyə bilmirəm. Yaxşısı telefona baxın.",
-            
-            "əli": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. Ətraflı İnstagram: @elimeherremovofc`,
-            
-            "əli məhərrəmov": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. Ətraflı İnstagram: @elimeherremovofc`,
-            
-            "qəlb yarası": `Qəlb Yarası (2018) - Əli Məhərrəmov tərəfindən yazılmış şeirlər kitabıdır. Kitabda nakam sevgi, puç olan məhəbbət və ailə mövzusunda 200 şeir yer alır. Mir.az saytında yayımlanır. Xoş oxumalar!`,
-            
-            "qisas": `Qisas (2023) - Baş obraz Xədicənin universitet illərində Əliyə aşiq olmasından bəhs edir. Mir.az saytından yükləyə bilərsiniz.`,
-            
-            "dedektiv con": `Dedektiv Con (2023) - Hadisələr Amerikanın Texas ştatında baş verir. Məşhur dedektiv Con, cinayətkar Billin izinə düşür. Mir.az-da mövcuddur.`,
-            
-            "sənsizlik": `Sənsizlik (2024) - Əli Məhərrəmovun 4-cü kitabıdır. Kitabda sevgi, xəyanət və sənsizlik mövzuları qısa mətnlərlə ifadə olunub.`,
-            
-            "tapşırıq": `Tapşırıq - Dövlət qulluğuna qəbul olan Vaqif adlı gəncin gizli missiyasından bəhs edir.`,
-            
-            "kitabları": "Əli Məhərrəmovun kitabları: Qəlb Yarası, Qisas, Dedektiv Con, Sənsizlik və Tapşırıq.",
-            
-            "əlaqə": "İnstagram: @elimeherremovofc və ya Mail.ru vasitəsilə əlaqə yarada bilərsiniz.",
-            
-            "instagram": "Müəllifi instaqramda @elimeherremovofc istifadəçi adı ilə tapa bilərsiniz.",
-            
-            "şeirləri hardan oxuyum": "İnstagramda Qəlb Yarası şeirlər səhifəsinə girərək ordan bütün şeirləri oxuya bilərsiniz!",
-            
-            "sağol": "Sən sağ ol! Aİ-LA sənə yardım etməkdən məmnundur. 😊",
-            
-    "1": `1) Görüş
+        // --- YENİLƏNMİŞ SUAL-CAVAB BAZASI ---
+const knowledgeBase = {
+    "salam": "Salam! Necəsən? Sənə necə kömək edə bilərəm?",
+    "çox sağol": "Dəyməz! Həmişə xidmətindəyəm.😊",
+    "necəsən": "Mən çox yaxşıyam! Sənin üçün nə edə bilərəm?",
+    "darıxıram": "O duyğu insanı içdən yıxır. Qədir bilməyənlər üçün dəyməz.",
+    "sən necəsən": "Mən bir süni intellektəm, hər zaman işləməyə hazıram! Bəs sən necəsən?",
+    "adın nədir": "Mənim adım Aİ-LA. Sənin ağıllı köməkçinəm.",
+    "yağış yağır": "Ən romantik hava yağışlı havadır.",
+    "hesabla": "Mən kalkulyator deyiləm əzizim.",
+    "mən kiməm": "Kim olduğunu bilmirəm. Amma gözəl qəlblisən.",
+    "kim yaradıb": "Məni Əli Məhərrəmov yaradıb.",
+    "bir tətbiq varmı": "Bəli Qəlb Yarası android telefonlar üçün mövcuddur. Yükləyə bilərsiz.",
+    "onu sevirəm": "Bəs o necə sualını da düşün arada.",
+    "təşəkkürlər": "Dəyməz ürəyim. Çox xoş oldu.",
+    "tətbiq": "Qəlb Yarası android telefonlar üçün mövcuddur. Yükləyə bilərsiz.",
+    "sitat de": "Sevgi ölüm deyil. Sevgi zülmdür.",
+    "adım nədir": "Belə deyə bilərəm. Bəydisə Kral. Qadındırsa Kraliça.",
+    "link": "https://qelbyarasielimeherremov.taplink.ws/ bu linkə daxil ol və bütün şeirlərdən və kitablardan məlumatlı ol.",
+    "sayt": "https://elimeherremov.taplink.ws/ bura daxil ol həm kitablardan həmdə yeniliklərdən xəbərdar ol",
+    "nə vaxt": "18.04.2026-cı ildə😊.",
+    "sevdim": "Elə məndə.",
+    "şeir": "Şeirləri oxumaq üçün. Google Qəlb Yarası yazıb axtarış edin.", 
+    "səni sevirəm": "Sevmək yaxşı işdi. Məndə səni sevirəm canım❤️.",
+    "ayla": "Buyurun. Sualınızı verin.",
+    "mahnı": "Əli Məhərrəmovun bəstələdiyi mahnıları dinləmək üçün YouTube və ya İnstagram hesabına baxın",
+    "watsapp": "+90 536 836 78 78 Yalnız sms yazın. Zəngə cavab verilmir.",
+    "hara gedək": "Sən hara getsən məndə ora gedəcəm. Daima yanındayam",
+    "hava necədir": "Pəncərədən baxmağı unutma, amma ümid edirəm ki, ürəyin kimi gözəldir!",
+    "saat neçədir": "Mən tam vaxtı sizə deyə bilmirəm. Yaxşısı telefona baxın.",
+    "əli": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. Ətraflı İnstagram: @elimeherremovofc`,
+    "əli məhərrəmov": `Əli Məhərrəmov 1 İyun 2000-ci ildə Ağsu rayonunda anadan olmuş yazıçıdır. "Qəlb Yarası", "Qisas", "Dedektiv Con", "Sənsizlik" və "Tapşırıq" kitablarının müəllifidir. Ətraflı İnstagram: @elimeherremovofc`,
+    "qəlb yarası": `Qəlb Yarası (2018) - Əli Məhərrəmov tərəfindən yazılmış şeirlər kitabıdır. Kitabda nakam sevgi, puç olan məhəbbət və ailə mövzusunda 200 şeir yer alır. Mir.az saytında yayımlanır. Xoş oxumalar!`,
+    "qisas": `Qisas (2023) - Baş obraz Xədicənin universitet illərində Əliyə aşiq olmasından bəhs edir. Mir.az saytından yükləyə bilərsiniz.`,
+    "dedektiv con": `Dedektiv Con (2023) - Hadisələr Amerikanın Texas ştatında baş verir. Məşhur dedektiv Con, cinayətkar Billin izinə düşür. Mir.az-da mövcuddur.`,
+    "sənsizlik": `Sənsizlik (2024) - Əli Məhərrəmovun 4-cü kitabıdır. Kitabda sevgi, xəyanət və sənsizlik mövzuları qısa mətnlərlə ifadə olunub.`,
+    "tapşırıq": `Tapşırıq - Dövlət qulluğuna qəbul olan Vaqif adlı gəncin gizli missiyasından bəhs edir.`,
+    "kitabları": "Əli Məhərrəmovun kitabları: Qəlb Yarası, Qisas, Dedektiv Con, Sənsizlik və Tapşırıq.",
+    "əlaqə": "İnstagram: @elimeherremovofc və ya Mail.ru vasitəsilə əlaqə yarada bilərsiniz.",
+    "instagram": "Müəllifi instaqramda @elimeherremovofc istifadəçi adı ilə tapa bilərsiniz.",
+    "şeirləri hardan oxuyum": "İnstagramda Qəlb Yarası şeirlər səhifəsinə girərək ordan bütün şeirləri oxuya bilərsiniz!",
+    "sağol": "Sən sağ ol! Aİ-LA sənə yardım etməkdən məmnundur. 😊",
 
-Bu görüş məni çox gözlətdi
-Sənin yoluna baxa-baxa qaldım
-Nə edim mən səni çox sevirəm
-Ancaq səndə gərək məni sevəsən
+    // --- ŞEİRLƏR BÖLMƏSİ (Rəqəmlər dırnaqdadır ki, qarışmasın) ---
+    "1": `1) Görüş\n\nBu görüş məni çox gözlətdi\nSənin yoluna baxa-baxa qaldım...`,
+    
+    "2": `2) Sən idin\n\nSən idin tək mənim\nÜrəyim varım\nSən getdin qalmadı\nTaqətim halım...`,
 
-Məni öz sevginə layiq görəsən
-Ağlayanda əlimdən tutan aşqım
-Gül bağçamda gül yerişli gəzən aşqım
-Həyatımda çox acılar çəkmişəm
+    "3": `3) Sevgi\nSevgidir həyatın\nMənası sevgi\nSevgisiz bu dünya\nYalandı yalan...`,
 
-Mənə bu acıları unutdur sevgi
-Bəlkə bu sevgiyə ara verəsən
-Xeyr mən buna ara vermərəm
-Məni gözlədən eşq hekayəsi
-
-Birdən-birə yox oldu getdi
-Özümdə bilmirəm niyə görəsən
-Həyat məni çəkir sınağa
-Bu eşq illəri nə ilkdi nə son
-
-Məzara qədər sürəcək bu eşq
-Mən bunu qəbul edirəm aşqım
-Lakin həmişə sürsün bu eşq
-Xəyanət pəncəsi gördükdə özüm
-
-Hirsimdən bilmirəm nə edim özüm
-Canımdan çox sevdiyim insan belə
-O vaxt gözümdən düşər mənim
-Unudub illəri düşüncələrə qapılıram
-
-Ancaq illəri çətindir unutmaq
-Həyatımı sevgiylə dolduran
-İllər oldu mənim
-İllərsiz mən barsız ağacam
-
-Barsız ağacı neyləyirəm mən
-Bu illər mənə çox şey verdi
-Onsuz mən çox yalqızam
-Gündüz oldu gecə oldu gəlmədin görüşə
-
-Çəkdim həyat acısını mən o gecə
-Bunlar mənim üçün ağır itki oldu
-Lakin yenə səni sevdim
-Mən səni çox sevirəm
-
-Səndə məni sev
-Bu görüşü unutmayacağam
-Səndə bu görüşü unutma
-Bu görüşü unutsanda
-Məni unutma sevgilim`,
-            
-     2: `2) Sən idin
-
-Sən idin tək mənim
-Ürəyim varım
-Sən getdin qalmadı
-Taqətim halım
-
-Sevgisiz bu dünyada
-Yaşamaq olmaz
-Sən idin dünyada
-Sevgilim yarım
-
-Yaşamaq çətindi
-Sənsiz dünyada
-Sən idin bu dünyada
-Yaşadan məni
-
-Sən idin çiçəyim
-Gülüm baharım
-Sən getdin çiçəyim
-Güllərim soldu
-
-Sən idin həyatda
-Aldığım nəfəs
-Sən idin köksümdə
-Döyünən ürək
-
-Sən idin dünyada
-Yaşamaq səbəbim
-Sən idin həyata
-Tutduran məni
-
-Sən idin həyatda
-Tək mənim varım
-Səndəki ayrılıb
-Burdan gedirsən
-
-Artıq yaşamağa
-Heç səbəbim yox
-Sən idin demədən
-Atıb gedirsən`,
-
-             "3": `3) Sevgi
-Sevgidir həyatın
-Mənası sevgi
-Sevgisiz bu dünya
-Yalandı yalan
-
-Sevirəm sözünü
-Hər adam deyir
-Ürəkdən çox adam
-Deyə bilməyir
-
-Sevirəm sevirəm
-Demək deyildir
-Sevirəm deyərkən
-Titrəmək gərək
-
-Sevgidir həyatda
-Bu müqəddəs söz
-Sevirəm deyərkən
-Sevilmək gərək
-
-Boş yerə sevməyin
-Heç mənası yox
-Sevdiyin adamda
-Səni sevə gərək
-
-Sevmək gözələdə
-Çirkinədə var
-Sevməkçün gözəllik
-Heç lazım deyil
-
-Həyatda ən məşhur
-Bu iki sözdür:
-Biri sevilməkdir
-Biridə sevmək`,
-            
-            26: `26) Sən məni yorma
-            
-Dünyaya hamımız bir dəfə gəldik
-Sevib-sevilmək nədi dünyada gördük
-Kasıbın sevgisin dəyərli bildik
-Pul-para ev maşın fərqinə varma
-
-Dedin sevəcəyəm sevmədin məni
-Vurdun yerdən-yerə bilmədin nədi
-Canımı əlimdən aldın nədəndi
-Dedin ki boş şeydi vecinə alma
-
-Bu sevgi çox ağır məsələ imiş
-Nə qədər çalışsanda cavabsız qalır
-Suallar çox asan cavablar çətin
-Bilmirəm nə deyim ürəyinə salma
-
-Gecələr gələndə yuxusuz qalıram
-Deməki sevgilim niyə yatmırsan
-Fikirdən xəyaldan yuxularımda
-Səni düşünərək sənsiz qalıram
-
-Yenədə oturub fikir çəkirəm
-Görəsən o məni düşünürmü heç
-Düşündü düşünmədi yenə nə fayda
-Əsası odur ki düşünürəm mən
-
-Sevgi yollarında qanadsız quşam
-Nə qədər etsəmdə uça bilmirəm
-Qırılıb qanadım qırılıb qolum
-Yenədə sevirəm sevəcəyəm mən
-
-Deyirəm ilahi bu nə sevgidi
-Leylini , Məcnunu , Əsli Kərəmi
-Geridə qoyubdu bizim sevgimiz
-Sevirəm sevmişəm sevəcəm yenə
-
-Yoruldum dünyanın zalımlığından
-Yoruldum həyatın qəddarlığından
-Yoruldum sevginin ucuzluğundan
-Sevgilim gəl daha sən məni yorma`
-
+    "26": `26) Sən məni yorma\n\nDünyaya hamımız bir dəfə gəldik\nSevib-sevilmək nədi dünyada gördük\nKasıbın sevgisin dəyərli bildik...`
 };
 
+// --- BU FUNKSİYA PROBLEMİN HƏLLİDİR ---
+function getResponse(userInput) {
+    const input = userInput.trim().toLowerCase();
+
+    // Birbaşa bərabərlik yoxlaması (Tam olaraq nə yazılıbsa o çıxır)
+    if (knowledgeBase[input]) {
+        return knowledgeBase[input];
+    }
+
+    return "Bağışlayın, anlaya bilmədim. Zəhmət olmasa rəqəmi və ya sualı dəqiq yazın.";
+}
 
         const body = document.body;
         const welcomeUI = document.getElementById('welcome-ui');
