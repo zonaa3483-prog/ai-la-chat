@@ -6,24 +6,20 @@
     <title>Aİ-LA - Ağıllı Köməkçi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #ffffff; --text: #1a1a1a; --header-bg: #ffffff; --input-bg: #f9fafb; --ai-bubble: #f3f4f6; }
         .dark { --bg: #121212; --text: #f3f4f6; --header-bg: #1e1e1e; --input-bg: #2d2d2d; --ai-bubble: #2d2d2d; }
 
         body { background-color: var(--bg); color: var(--text); transition: all 0.3s ease; font-family: 'Inter', sans-serif; overflow: hidden; }
         
-        .chat-bubble { max-width: 85%; border-radius: 18px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; position: relative; line-height: 1.5; }
+        .chat-bubble { max-width: 85%; border-radius: 18px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; position: relative; line-height: 1.6; }
         .user-msg { background-color: #3b82f6; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
         .ai-msg { background-color: var(--ai-bubble); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
-        .voice-btn { cursor: pointer; margin-top: 8px; font-size: 12px; color: #3b82f6; display: flex; items-center: center; gap: 5px; transition: 0.2s; }
-        .voice-btn:hover { opacity: 0.7; }
+        .voice-btn { cursor: pointer; margin-top: 8px; font-size: 12px; color: #3b82f6; display: flex; align-items: center; gap: 5px; font-weight: 600; }
 
-        .link-style { color: #3b82f6; text-decoration: underline; font-weight: 600; }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        .typing-effect { overflow: hidden; display: inline-block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
     </style>
 </head>
 <body class="flex flex-col h-screen">
@@ -32,8 +28,8 @@
         <div class="flex items-center gap-3">
             <img id="header-logo" src="" class="w-10 h-10 rounded-full border shadow-sm" alt="AI-LA">
             <div>
-                <h1 class="text-sm font-bold">Aİ-LA <span class="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded ml-1">PRO</span></h1>
-                <p class="text-[10px] opacity-60">Onlayn Axtarış Aktivdir</p>
+                <h1 class="text-sm font-bold">Aİ-LA <span class="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded ml-1">SYSTEM</span></h1>
+                <p class="text-[10px] opacity-60">Daxili Baza Aktivdir</p>
             </div>
         </div>
         <div class="flex gap-4">
@@ -45,15 +41,15 @@
     <main id="chat-screen" class="flex-1 overflow-y-auto p-4 flex flex-col space-y-4">
         <div id="welcome-ui" class="mt-20 flex flex-col items-center text-center">
             <img id="main-logo" src="" class="w-20 h-20 rounded-full border-4 border-blue-500/10 mb-4 shadow-xl" alt="AI-LA">
-            <h2 class="text-xl font-bold">Mən Aİ-LA, sənə necə kömək edim?</h2>
-            <p class="text-xs opacity-50 mt-2 max-w-xs">Həm söhbət edə, həm də internetdən məlumat tapa bilərəm.</p>
+            <h2 class="text-xl font-bold">Aİ-LA-ya xoş gəldin!</h2>
+            <p class="text-xs opacity-50 mt-2 max-w-xs">Sual soruşun və ya şeir nömrələrini (1, 2...) yazın.</p>
         </div>
         <div id="messages-container" class="w-full flex flex-col space-y-4"></div>
     </main>
 
     <footer class="p-4 bg-transparent">
         <div class="max-w-3xl mx-auto relative">
-            <input id="userInput" type="text" placeholder="Sualınızı bura yazın..." 
+            <input id="userInput" type="text" placeholder="Mesajınızı yazın..." 
                 class="w-full py-4 px-6 pr-14 rounded-2xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
             <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-500 text-white p-3 rounded-xl hover:bg-blue-600 transition-all">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -66,10 +62,18 @@
         document.getElementById('header-logo').src = BOT_IMAGE_URL;
         document.getElementById('main-logo').src = BOT_IMAGE_URL;
 
+        // BURA ŞEİRLƏR VƏ MƏLUMATLAR ƏLAVƏ EDİN
         const knowledgeBase = {
-            "salam": "Salam! Mən Aİ-LA. Sizin üçün internetdə araşdırma edə və ya sadəcə söhbət edə bilərəm. Necə kömək edim?",
-            "necəsən": "Təşəkkür edirəm! Sizin üçün məlumat toplamaq məni xoşbəxt edir. Siz necəsiz?",
-            "kim yaradıb": "Mən Əli Məhərrəmov tərəfindən hazırlanmış süni intellekt köməkçisiyəm."
+            "salam": "Salam! Mən Aİ-LA. Sənə necə kömək edə bilərəm?",
+            "necəsən": "Təşəkkür edirəm, mən çox yaxşıyam. Sizə xidmət etmək üçün buradayam.",
+            "kim yaradıb": "Mən Əli Məhərrəmov tərəfindən hazırlanmış süni intellekt köməkçisiyəm.",
+            
+            // ŞEİRLƏR (Rəqəmlərlə)
+            "1": "Mən səni sevirdim, bəlkə də hələ,\nSevgim ürəyimdə sönməyib tamam.\nLakin qoy bu sevgi səni incitməsin,\nSəni heç bir şeylə mən üzmək istəməm.",
+            
+            "2": "Sən elə bir zirvəsən ki, hər yetən çata bilməz,\nSən elə bir baharsan ki, hər yetən baxa bilməz.\nQəlbimdə açan tək bir çiçəksən,\nSəni məndən başqa kimsə duya bilməz.",
+            
+            "3": "Həyat bir yuxudur, bizsə yolçular,\nBəzən dumanlıdır, bəzən nurlu yollar.\nÜmidlə baxdıqca gələcək günə,\nİnsan qəlbində hər zaman bir günəş parlar."
         };
 
         function toggleTheme() {
@@ -80,7 +84,7 @@
             location.reload();
         }
 
-        async function handleSend() {
+        function handleSend() {
             const input = document.getElementById('userInput');
             const text = input.value.trim();
             if (!text) return;
@@ -89,38 +93,25 @@
             addBubble(text, 'user-msg');
             input.value = '';
 
-            // Botun düşünmə effekti
             const loadingId = "loading-" + Date.now();
-            addBubble("Düşünürəm və axtarıram...", 'ai-msg', loadingId);
+            addBubble("Düşünürəm...", 'ai-msg', loadingId);
 
-            setTimeout(async () => {
-                let response = "";
+            setTimeout(() => {
+                document.getElementById(loadingId).remove();
+                
                 let lowerText = text.toLowerCase();
+                let response = "";
 
-                // 1. Lokaldan yoxla
+                // Məntiq: Tam bərabərlik və ya bazada axtarış
                 if (knowledgeBase[lowerText]) {
                     response = knowledgeBase[lowerText];
-                } 
-                // 2. Əgər lokalda yoxdursa "Simulyasiya edilmiş Axtarış" və ya Cavab generatoru
-                else {
-                    response = await simulateSearch(text);
+                } else {
+                    // Əgər bazada yoxdursa "Aİ-LA mühərriki" cavabı
+                    response = `Mən bütün internet və daxili datamı yoxladım. "${text}" haqqında əldə etdiyim nəticə budur:\n\nBu mövzuda hələ ki, xüsusi bir məlumatım yoxdur, amma mən özümü inkişaf etdirirəm. Başqa nə barədə kömək edə bilərəm?`;
                 }
 
-                document.getElementById(loadingId).remove();
                 addBubble(response, 'ai-msg', null, true);
-            }, 1000);
-        }
-
-        // İnternetdən məlumat toplama simulyasiyası (Axtarış linkləri ilə)
-        async function simulateSearch(query) {
-            const searchLink = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            const wikiLink = `https://az.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`;
-            
-            return `Sualınızla bağlı geniş araşdırma apardım. Budur tapdıqlarım: 
-            \n\n"${query}" haqqında ən son məlumatları toplamaq üçün bir neçə mənbəyə baxa bilərik. Məlumatlar Google və Wikipedia bazasında mövcuddur.
-            \n\n🔗 <a href="${searchLink}" target="_blank" class="link-style">Google-da nəticələrə bax</a>
-            \n🔗 <a href="${wikiLink}" target="_blank" class="link-style">Wikipedia məlumatlarını oxu</a>
-            \n\nHəmçinin qeyd edim ki, bu mövzu ilə bağlı geniş analizi yuxarıdakı rəsmi saytlardan daha dəqiq əldə edə bilərsiniz.`;
+            }, 800);
         }
 
         function addBubble(content, type, id = null, hasVoice = false) {
@@ -129,13 +120,15 @@
             div.className = `chat-bubble ${type} animate-fade-in`;
             if (id) div.id = id;
             
-            // HTML dəstəyi (linklər üçün)
-            div.innerHTML = `<div>${content.replace(/\n/g, '<br>')}</div>`;
+            // Şeir formatını qorumaq üçün innerText və ya replace istifadəsi
+            const textContent = document.createElement('div');
+            textContent.innerText = content;
+            div.appendChild(textContent);
 
             if (hasVoice) {
                 const voiceBtn = document.createElement('div');
                 voiceBtn.className = "voice-btn";
-                voiceBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Səsli oxu`;
+                voiceBtn.innerHTML = `<i class="fa-solid fa-play-circle"></i> Səsli oxu`;
                 voiceBtn.onclick = () => speakText(content);
                 div.appendChild(voiceBtn);
             }
@@ -146,19 +139,18 @@
         }
 
         function speakText(text) {
-            // Mətndən HTML taglarını silirik ki, robot linkləri oxumasın
-            const cleanText = text.replace(/<\/?[^>]+(>|$)/g, "");
+            // Səsli oxunuş zamanı köhnə səsləri dayandır
+            window.speechSynthesis.cancel();
             
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            
-            // Azərbaycan dili üçün qadın səsi seçimi (Brauzerdə varsa)
+            const utterance = new SpeechSynthesisUtterance(text);
             const voices = window.speechSynthesis.getVoices();
-            // Az dili birbaşa dəstəklənməyə bilər, ən yaxın Türk və ya Rus qadın səsi seçilir
+            
+            // Azərbaycan dilinə ən yaxın (Türk qadın səsi) seçimi
             const azVoice = voices.find(v => v.lang.includes('tr') || v.lang.includes('az'));
             
             if (azVoice) utterance.voice = azVoice;
-            utterance.lang = 'tr-TR'; // Azərbaycan dilinə ən yaxın səslənmə üçün
-            utterance.rate = 0.9;
+            utterance.lang = 'tr-TR'; 
+            utterance.rate = 1.0;
             utterance.pitch = 1.1;
 
             window.speechSynthesis.speak(utterance);
@@ -168,7 +160,6 @@
             if (e.key === "Enter") handleSend();
         });
 
-        // Səsləri yüklə
         window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
     </script>
 </body>
