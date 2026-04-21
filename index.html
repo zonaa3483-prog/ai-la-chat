@@ -2,7 +2,7 @@
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title> Aİ-LA - Suallarını Ayladan Soruş </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,7 +13,26 @@
         body { background-color: var(--bg); color: var(--text); transition: all 0.3s ease; font-family: 'Inter', sans-serif; }
         header { background-color: var(--header-bg); border-bottom: 1px solid rgba(128, 128, 128, 0.2); }
         
-        .chat-bubble { max-width: 85%; border-radius: 20px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; white-space: pre-wrap; }
+        /* Ümumi Mesaj Balonu */
+        .chat-bubble { 
+            max-width: 85%; 
+            border-radius: 20px; 
+            padding: 12px 16px; 
+            margin-bottom: 10px; 
+            font-size: 15px; 
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+        }
+
+        /* --- MOBİL ÜÇÜN ŞEİR TƏNZİMLƏMƏSİ --- */
+        .poem-style {
+            white-space: pre !important; /* Misranı qətiyyən qırmır */
+            overflow-x: auto;           /* Əgər misra çox uzundursa, sağa sürüşdürmə imkanı verir */
+            max-width: 95% !important;  /* Şeir olanda ekranı daha geniş istifadə edir */
+            font-family: monospace;      /* Misraların alt-alta düzgün durması üçün */
+            font-size: 13px !important;  /* Mobildə daha çox söz sığması üçün şrifti bir az kiçildir */
+        }
+
         .user-msg { background-color: #3b82f6; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
         .ai-msg { background-color: #f3f4f6; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 4px; }
         .dark .ai-msg { background-color: #2d2d2d; color: #f3f4f6; }
