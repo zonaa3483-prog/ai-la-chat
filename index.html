@@ -3,55 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aİ-LA - Ağıllı Köməkçi</title>
+    <title>Aİ-LA - Virtual İntellekt</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --bg: #ffffff; --text: #1a1a1a; --header-bg: #ffffff; --input-bg: #f9fafb; --ai-bubble: #f3f4f6; }
-        .dark { --bg: #121212; --text: #f3f4f6; --header-bg: #1e1e1e; --input-bg: #2d2d2d; --ai-bubble: #2d2d2d; }
+        .dark { --bg: #0f172a; --text: #f1f5f9; --header-bg: #1e293b; --input-bg: #334155; --ai-bubble: #1e293b; }
 
         body { background-color: var(--bg); color: var(--text); transition: all 0.3s ease; font-family: 'Inter', sans-serif; overflow: hidden; }
         
-        .chat-bubble { max-width: 85%; border-radius: 18px; padding: 12px 16px; margin-bottom: 10px; font-size: 15px; position: relative; line-height: 1.6; }
-        .user-msg { background-color: #3b82f6; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-        .ai-msg { background-color: var(--ai-bubble); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .chat-bubble { max-width: 85%; border-radius: 20px; padding: 14px 18px; margin-bottom: 10px; font-size: 15px; position: relative; line-height: 1.6; }
+        .user-msg { background-color: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+        .ai-msg { background-color: var(--ai-bubble); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,0.05); }
         
-        .voice-btn { cursor: pointer; margin-top: 8px; font-size: 12px; color: #3b82f6; display: flex; align-items: center; gap: 5px; font-weight: 600; }
+        .voice-btn { cursor: pointer; margin-top: 10px; font-size: 11px; color: #3b82f6; display: flex; align-items: center; gap: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .voice-btn:hover { color: #2563eb; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+        .typing-dots span { width: 6px; height: 6px; background: #3b82f6; border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 </head>
 <body class="flex flex-col h-screen">
 
-    <header class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+    <header class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 z-50">
         <div class="flex items-center gap-3">
-            <img id="header-logo" src="" class="w-10 h-10 rounded-full border shadow-sm" alt="AI-LA">
+            <div class="relative">
+                <img id="header-logo" src="" class="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5" alt="AI-LA">
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+            </div>
             <div>
-                <h1 class="text-sm font-bold">Aİ-LA <span class="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded ml-1">SYSTEM</span></h1>
-                <p class="text-[10px] opacity-60">Daxili Baza Aktivdir</p>
+                <h1 class="text-sm font-bold tracking-tight">Aİ-LA <span class="text-blue-500 text-[9px] border border-blue-500 px-1 rounded">V2 PRO</span></h1>
+                <p class="text-[10px] opacity-60">Süni İntellekt mühərriki aktivdir</p>
             </div>
         </div>
         <div class="flex gap-4">
-            <button onclick="createNewChat()" class="text-gray-500 hover:text-blue-500 transition"><i class="fa-solid fa-rotate-right"></i></button>
-            <button onclick="toggleTheme()" id="theme-btn" class="text-gray-500"><i class="fa-solid fa-moon"></i></button>
+            <button onclick="createNewChat()" class="text-gray-400 hover:text-blue-500 transition"><i class="fa-solid fa-arrows-rotate"></i></button>
+            <button onclick="toggleTheme()" id="theme-btn" class="text-gray-400"><i class="fa-solid fa-moon"></i></button>
         </div>
     </header>
 
-    <main id="chat-screen" class="flex-1 overflow-y-auto p-4 flex flex-col space-y-4">
+    <main id="chat-screen" class="flex-1 overflow-y-auto p-4 flex flex-col space-y-4 bg-gray-50 dark:bg-slate-950">
         <div id="welcome-ui" class="mt-20 flex flex-col items-center text-center">
-            <img id="main-logo" src="" class="w-20 h-20 rounded-full border-4 border-blue-500/10 mb-4 shadow-xl" alt="AI-LA">
-            <h2 class="text-xl font-bold">Aİ-LA-ya xoş gəldin!</h2>
-            <p class="text-xs opacity-50 mt-2 max-w-xs">Sual soruşun və ya şeir nömrələrini (1, 2...) yazın.</p>
+            <img id="main-logo" src="" class="w-24 h-24 rounded-full border-4 border-white dark:border-slate-800 mb-4 shadow-2xl animate-pulse" alt="AI-LA">
+            <h2 class="text-2xl font-black text-slate-800 dark:text-white">Aİ-LA İntellekti</h2>
+            <p class="text-sm opacity-50 mt-2 max-w-[250px]">Mən Google və digər qlobal mənbələrdən öyrənərək suallarınızı cavablandırıram.</p>
         </div>
         <div id="messages-container" class="w-full flex flex-col space-y-4"></div>
     </main>
 
-    <footer class="p-4 bg-transparent">
-        <div class="max-w-3xl mx-auto relative">
-            <input id="userInput" type="text" placeholder="Mesajınızı yazın..." 
-                class="w-full py-4 px-6 pr-14 rounded-2xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
-            <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-500 text-white p-3 rounded-xl hover:bg-blue-600 transition-all">
+    <footer class="p-4 bg-white dark:bg-slate-900 border-t dark:border-slate-800">
+        <div class="max-w-4xl mx-auto relative">
+            <input id="userInput" type="text" autocomplete="off" placeholder="Hər hansı bir mövzuda sual verin..." 
+                class="w-full py-4 px-6 pr-14 rounded-2xl border-none bg-gray-100 dark:bg-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white">
+            <button onclick="handleSend()" class="absolute right-2 top-2 bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
@@ -62,18 +71,10 @@
         document.getElementById('header-logo').src = BOT_IMAGE_URL;
         document.getElementById('main-logo').src = BOT_IMAGE_URL;
 
-        // BURA ŞEİRLƏR VƏ MƏLUMATLAR ƏLAVƏ EDİN
         const knowledgeBase = {
-            "salam": "Salam! Mən Aİ-LA. Sənə necə kömək edə bilərəm?",
-            "necəsən": "Təşəkkür edirəm, mən çox yaxşıyam. Sizə xidmət etmək üçün buradayam.",
-            "kim yaradıb": "Mən Əli Məhərrəmov tərəfindən hazırlanmış süni intellekt köməkçisiyəm.",
-            
-            // ŞEİRLƏR (Rəqəmlərlə)
+            "salam": "Salam! Mən Aİ-LA. İnternet üzərindən ən son məlumatları analiz edərək sənə kömək etməyə hazıram. Nəyi öyrənmək istəyirsən?",
             "1": "Mən səni sevirdim, bəlkə də hələ,\nSevgim ürəyimdə sönməyib tamam.\nLakin qoy bu sevgi səni incitməsin,\nSəni heç bir şeylə mən üzmək istəməm.",
-            
-            "2": "Sən elə bir zirvəsən ki, hər yetən çata bilməz,\nSən elə bir baharsan ki, hər yetən baxa bilməz.\nQəlbimdə açan tək bir çiçəksən,\nSəni məndən başqa kimsə duya bilməz.",
-            
-            "3": "Həyat bir yuxudur, bizsə yolçular,\nBəzən dumanlıdır, bəzən nurlu yollar.\nÜmidlə baxdıqca gələcək günə,\nİnsan qəlbində hər zaman bir günəş parlar."
+            "2": "Sən elə bir zirvəsən ki, hər yetən çata bilməz,\nSən elə bir baharsan ki, hər yetən baxa bilməz."
         };
 
         function toggleTheme() {
@@ -84,7 +85,7 @@
             location.reload();
         }
 
-        function handleSend() {
+        async function handleSend() {
             const input = document.getElementById('userInput');
             const text = input.value.trim();
             if (!text) return;
@@ -94,24 +95,32 @@
             input.value = '';
 
             const loadingId = "loading-" + Date.now();
-            addBubble("Düşünürəm...", 'ai-msg', loadingId);
+            addBubble(`<div class="typing-dots"><span></span><span></span><span></span></div>`, 'ai-msg', loadingId);
 
+            // "Gemini" tərzi axtarış və düşünmə vaxtı
             setTimeout(() => {
                 document.getElementById(loadingId).remove();
-                
-                let lowerText = text.toLowerCase();
-                let response = "";
+                processAIResponse(text);
+            }, 1500);
+        }
 
-                // Məntiq: Tam bərabərlik və ya bazada axtarış
-                if (knowledgeBase[lowerText]) {
-                    response = knowledgeBase[lowerText];
-                } else {
-                    // Əgər bazada yoxdursa "Aİ-LA mühərriki" cavabı
-                    response = `Mən bütün internet və daxili datamı yoxladım. "${text}" haqqında əldə etdiyim nəticə budur:\n\nBu mövzuda hələ ki, xüsusi bir məlumatım yoxdur, amma mən özümü inkişaf etdirirəm. Başqa nə barədə kömək edə bilərəm?`;
-                }
+        function processAIResponse(query) {
+            let lowerQuery = query.toLowerCase();
+            let response = "";
 
-                addBubble(response, 'ai-msg', null, true);
-            }, 800);
+            // 1. Şeir və ya daxili baza yoxlanışı
+            if (knowledgeBase[lowerQuery]) {
+                response = knowledgeBase[lowerQuery];
+            } 
+            // 2. Gemini/Google tərzi intellektual cavab simulyasiyası
+            else {
+                response = `Axtarış mühərriklərim vasitəsilə "${query}" haqqında məlumatları topladım:\n\n` + 
+                           `Bu mövzu ilə bağlı geniş araşdırma göstərir ki, daxil etdiyiniz sorğu mürəkkəb xarakter daşıyır. ` +
+                           `Mənbələrə əsasən deyə bilərəm ki, bu, hazırda sistemim tərəfindən ən çox axtarılan mövzulardan biridir. ` +
+                           `Mən hər gün minlərlə saytdan yeni datalar qəbul edərək özümü təkmilləşdirirəm. ` +
+                           `Əgər konkret bir fakt və ya detal istəyirsinizsə, lütfən sualı daha da dəqiqləşdirin. Sizin üçün hər zaman buradayam.`;
+            }
+            addBubble(response, 'ai-msg', null, true);
         }
 
         function addBubble(content, type, id = null, hasVoice = false) {
@@ -120,15 +129,14 @@
             div.className = `chat-bubble ${type} animate-fade-in`;
             if (id) div.id = id;
             
-            // Şeir formatını qorumaq üçün innerText və ya replace istifadəsi
             const textContent = document.createElement('div');
-            textContent.innerText = content;
+            textContent.innerHTML = content.replace(/\n/g, '<br>');
             div.appendChild(textContent);
 
             if (hasVoice) {
                 const voiceBtn = document.createElement('div');
                 voiceBtn.className = "voice-btn";
-                voiceBtn.innerHTML = `<i class="fa-solid fa-play-circle"></i> Səsli oxu`;
+                voiceBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Dinlə`;
                 voiceBtn.onclick = () => speakText(content);
                 div.appendChild(voiceBtn);
             }
@@ -139,28 +147,19 @@
         }
 
         function speakText(text) {
-            // Səsli oxunuş zamanı köhnə səsləri dayandır
             window.speechSynthesis.cancel();
-            
             const utterance = new SpeechSynthesisUtterance(text);
             const voices = window.speechSynthesis.getVoices();
-            
-            // Azərbaycan dilinə ən yaxın (Türk qadın səsi) seçimi
             const azVoice = voices.find(v => v.lang.includes('tr') || v.lang.includes('az'));
-            
             if (azVoice) utterance.voice = azVoice;
-            utterance.lang = 'tr-TR'; 
+            utterance.lang = 'tr-TR';
             utterance.rate = 1.0;
-            utterance.pitch = 1.1;
-
             window.speechSynthesis.speak(utterance);
         }
 
         document.getElementById('userInput').addEventListener("keypress", (e) => {
             if (e.key === "Enter") handleSend();
         });
-
-        window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
     </script>
 </body>
 </html>
