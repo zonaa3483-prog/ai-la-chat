@@ -9431,29 +9431,28 @@ Allahım al canımı qoy rahat ölüm`,
 
             setTimeout(() => {
                 let response = "Bu barədə məlumatım yoxdur. Başqa sualınız varsa verin?🙂‍↔️";
+                let isPoem = false;
 
-                // --- DÜZƏLDİLMİŞ MƏNTİQ ---
-                // Əvvəlcə tam bərabərliyi yoxlayırıq (2 ilə 26 qarışmasın deyə)
                 if (knowledgeBase[text]) {
                     response = knowledgeBase[text];
-                } 
-                // Əgər tam rəqəm deyilsə, sözləri cümlə içində axtarırıq
-                else {
+                    // Əgər cavab rəqəmlə başlayırsa (məs: 1), şeir kimi tanı
+                    if (!isNaN(text)) isPoem = true;
+                } else {
                     for (let key in knowledgeBase) {
-                        // Rəqəm olmayan açarları (sözləri) includes ilə axtarırıq
                         if (isNaN(key) && text.includes(key)) {
                             response = knowledgeBase[key];
                             break;
                         }
                     }
                 }
-                addBubble(response, 'ai-msg');
+                addBubble(response, 'ai-msg', isPoem);
             }, 600);
         }
 
-        function addBubble(text, type) {
+        function addBubble(text, type, isPoem = false) {
             const div = document.createElement('div');
-            div.className = `chat-bubble ${type} animate-fade-in`;
+            // Əgər şeirdirsə 'poem-style' klasını əlavə et
+            div.className = `chat-bubble ${type} animate-fade-in ${isPoem ? 'poem-style' : ''}`;
             div.innerText = text;
             msgContainer.appendChild(div);
             
@@ -9465,4 +9464,3 @@ Allahım al canımı qoy rahat ölüm`,
     </script>
 </body>
 </html>
-
